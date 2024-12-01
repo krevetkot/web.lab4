@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,17 @@ import {CommonModule} from '@angular/common';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
 
+  constructor(private router: Router,
+    private authService: AuthService) {
+
+  }
+
   submitLogin(){
-    console.log(this.loginForm.value)
+    this.authService.login(this.loginForm.value).subscribe({
+      //admin надо поменять на main
+      next: () => this.router.navigate(['admin']),
+      error: (err) => alert(err.message)
+    })
   }
 
   ngOnInit(): void {

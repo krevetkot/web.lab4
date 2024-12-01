@@ -23,7 +23,7 @@
                 <p *ngIf="this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched">
                   <small class="text-danger">Password must include minimum 8 characters, at least 1 letter and 1 number!</small></p>
               </div>
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button [disabled] = "loginForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
             </form>
           </div>
           <div>
