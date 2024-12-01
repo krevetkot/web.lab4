@@ -21,6 +21,9 @@
     "@angular/platform-server": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.2",
+    "@ng-bootstrap/ng-bootstrap": "^17.0.1",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -30,6 +33,7 @@
     "@angular-devkit/build-angular": "^19.0.2",
     "@angular/cli": "^19.0.2",
     "@angular/compiler-cli": "^19.0.0",
+    "@angular/localize": "^19.0.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
@@ -40,5 +44,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.6.2"
-  }
+  },
+  "description": "This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
