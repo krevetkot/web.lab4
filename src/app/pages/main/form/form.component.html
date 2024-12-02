@@ -1,1 +1,9 @@
-<p>form works!</p>
+<form (ngSubmit)="submitMainForm()" [formGroup]="mainForm">
+  <div>
+    <input type="text" pInputText [(ngModel)]="yValue" [ngModelOptions]="{standalone: true}" class="w-full mb-3"/>
+    <p-slider [(ngModel)]="yValue" [ngModelOptions]="{standalone: true}" class="w-full" />
+  </div>
+
+  <button pButton type="submit" label="Send" [disabled]="false" class="p-button-outlined p-button-lg p-d-block"></button>
+
+</form>

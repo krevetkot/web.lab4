@@ -71,3 +71,18 @@ section.vh-100 {
   color: #ffffff !important;
   border: 1px solid;
 }
+
+@layer primeng {
+  .p-slider .p-slider-handle {
+    background: maroon !important;
+    border: 2px solid maroon !important;
+  }
+  .p-slider .p-slider-range {
+    background: maroon !important;
+  }
+  .p-slider:not(.p-disabled) .p-slider-handle:hover {
+    background: #3d1101 !important;
+    border-color: #3d1101 !important;
+  }
+}
+

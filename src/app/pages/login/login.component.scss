@@ -1,0 +1,22 @@
+@layer primeng {
+
+  .p-slider .p-slider-handle {
+    height: 1.143rem;
+    width: 1.143rem;
+    background: maroon !important;
+    border: 2px solid maroon;
+    border-radius: 4px;
+    transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .p-slider .p-slider-range {
+    background: #3d1101;
+  }
+
+  .p-slider:not(.p-disabled) .p-slider-handle:hover {
+    background: #3d1101;
+    border-color: #3d1101;
+  }
+
+}
+
