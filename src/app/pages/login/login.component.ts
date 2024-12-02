@@ -3,12 +3,19 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {Router, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-login',
   imports: [RouterOutlet,
     CommonModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule,
+    CardModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -16,14 +23,11 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
 
   constructor(private router: Router,
-    private authService: AuthService) {
-
-  }
+    private authService: AuthService) {}
 
   submitLogin(){
     this.authService.login(this.loginForm.value).subscribe({
-      //admin надо поменять на main
-      next: () => this.router.navigate(['admin']),
+      next: () => this.router.navigate(['main']),
       error: (err) => alert(err.message)
     })
   }

@@ -1,39 +1,37 @@
 <section class="vh-100 bg-login">
-<div class="container py-5 h-100">
-  <div class="row d-flex justify-content-left align-items-center h-100">
-    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-      <div class="card bg-login-window text-white" style="border-radius: 1rem;">
-        <div class="card-body p-5 text-center">
-
-          <div class="mb-md-5 mt-md-4 pb-5">
-
-            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-            <p class="text-white-50 mb-5">Please enter your login and password!</p>
-
-            <form (ngSubmit)="submitLogin()" [formGroup]="loginForm">
-              <div class="form-outline form-white mb-4">
-                <input formControlName="login" type="text" id="typeLoginX" class="form-control form-control-lg"/>
-                <label class="form-label" for="typeLoginX">Login</label>
-                <p *ngIf="this.loginForm.get('login')?.invalid && this.loginForm.get('login')?.touched">
-                  <small class="text-danger">Login is required!</small></p>
-              </div>
-
-              <div class="form-outline form-white mb-4">
-                <input formControlName="password" type="password" id="typePasswordX" class="form-control form-control-lg"/>
-                <label class="form-label" for="typePasswordX">Password</label>
-                <p *ngIf="this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched">
-                  <small class="text-danger">Password must include minimum 8 characters, at least 1 letter and 1 number!</small></p>
-              </div>
-              <button [disabled] = "loginForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-            </form>
-          </div>
+  <div class="p-grid p-justify-start p-align-items-start p-col-8">
+    <!-- Карточка PrimeNG -->
+    <p-card styleClass="bg-login-window text-white p-justify-start p-align-items-start" header="Login" [style]="{'border-radius': '1rem'}">
+      <form (ngSubmit)="submitLogin()" [formGroup]="loginForm">
+        <!-- Поле ввода Login -->
+        <div class="p-field p-mb-4">
+          <label for="login">Login</label>
+          <input pInputText id="login" formControlName="login" class="p-inputtext p-component p-d-block" placeholder="Type your login" />
           <div>
-            <p class="mb-0">Don't have an account? <a routerLink="../registration" class="text-white-50 fw-bold">Sign Up</a></p>
+            <small *ngIf="loginForm.get('login')?.invalid && loginForm.get('login')?.touched" class="p-error">
+              Login is required!
+            </small>
           </div>
-
         </div>
+
+        <!-- Поле ввода Password -->
+        <div class="p-field">
+          <label for="password">Password</label>
+          <input pInputText id="password" type="password" formControlName="password" class="p-inputtext p-component p-d-block" placeholder="Type your password"/>
+          <div>
+            <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="p-error">Min 8 characters, 1 letter, 1 number!
+            </small>
+          </div>
+        </div>
+
+        <!-- Кнопка Login -->
+        <button pButton type="submit" label="Login" [disabled]="loginForm.invalid" class="p-button-outlined p-button-lg p-d-block"></button>
+      </form>
+      <div class="p-mt-4">
+        <p>Don't have an account?
+          <a routerLink="../registration" class="text-white-50 fw-bold">Sign Up</a>
+        </p>
       </div>
-    </div>
+    </p-card>
   </div>
-</div>
 </section>

@@ -33,7 +33,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "primeng/resources/themes/bootstrap4-light-blue/theme.css",
+              "primeng/resources/themes/bootstrap4-light-purple/theme.css",
+              "primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+              "primeng/resources/themes/bootstrap4-dark-purple/theme.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
