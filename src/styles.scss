@@ -4,17 +4,17 @@
 @import 'bootstrap/scss/bootstrap';
 
 .gradient-custom {
-  background: #be9e5a;
-  background: -webkit-linear-gradient(
-      to right,
-      #84563c ,
-      #d2b48c
-  );
-  background: linear-gradient(
-      to right,
-      #84563c ,
-      #d2b48c
-  );
+  //background: #be9e5a;
+  //background: -webkit-linear-gradient(
+  //    to right,
+  //    #84563c ,
+  //    #d2b48c
+  //);
+  //background: linear-gradient(
+  //    to right,
+  //    #84563c ,
+  //    #d2b48c
+  //);
 }
 
 .text-info:hover {
@@ -30,3 +30,13 @@
   background: rgb(68, 22, 2);
 }
 
+.bg-login{
+  background-image: url('../public/bg-login.png');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-login-window{
+  background-color: rgb(61, 17, 1);
+}
