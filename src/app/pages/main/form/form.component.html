@@ -1,9 +1,60 @@
-<form (ngSubmit)="submitMainForm()" [formGroup]="mainForm">
-  <div>
-    <input type="text" pInputText [(ngModel)]="yValue" [ngModelOptions]="{standalone: true}" class="w-full mb-3"/>
-    <p-slider [(ngModel)]="yValue" [ngModelOptions]="{standalone: true}" class="w-full" />
+<div class="p-grid">
+  <div class="col-12 p-md:col-6">
+    <div class="card p-fluid">
+      <form (ngSubmit)="submitMainForm()">
+        <h2>Choose :)</h2>
+
+        <!-- Поле Y -->
+        <div class="field p-md:col-6 p-mb-3">
+          <label for="yLabel">Y: </label>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="yValue"
+            name="y"
+            id="yLabel"
+            [ngModelOptions]="{standalone: true}"
+            class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid p-filled"
+          />
+          <p-slider
+            [(ngModel)]="yValue"
+            name="ySlider"
+            [min]="-10"
+            [max]="10"
+            [ngModelOptions]="{standalone: true}"
+            class="p-element ng-untouched ng-valid ng-dirty"
+          />
+        </div>
+
+        <!-- Поле X -->
+        <div class="field p-md:col-6 p-mb-3">
+          <label for="xLabel">X: </label>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="xValue"
+            name="x"
+            id="xLabel"
+            class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid p-filled"
+          />
+          <p-knob
+            [(ngModel)]="xValue"
+            name="xKnob"
+            valueTemplate="{value}"
+            [min]="-3"
+            [max]="5"
+          ></p-knob>
+        </div>
+
+        <!-- Кнопка отправки -->
+        <button
+          pButton
+          type="submit"
+          label="Send"
+          [disabled]="false"
+          class="p-button-outlined p-button-lg p-d-block"
+        ></button>
+      </form>
+    </div>
   </div>
-
-  <button pButton type="submit" label="Send" [disabled]="false" class="p-button-outlined p-button-lg p-d-block"></button>
-
-</form>
+</div>
