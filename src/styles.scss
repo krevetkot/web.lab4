@@ -2,6 +2,7 @@
 
 /* Importing primeng CSS file. */
 @import "primeng/resources/themes/bootstrap4-light-purple/theme.css";
+//@import "primeng/resources/themes/bootstrap4-dark-blue/theme.css";
 
 .text-info:hover {
   background: rgb(61, 17, 1);
@@ -106,4 +107,7 @@ section.vh-100 {
 
 .text-black {
   color: black;
+}
+.text-white {
+  color: white;
 }
