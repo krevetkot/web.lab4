@@ -1,8 +1,27 @@
 <div class="p-grid">
   <div class="col-12 p-md:col-6">
-    <div class="card p-fluid">
+    <p-card class="card p-fluid" pStyleClass="form-card text-black p-justify-start p-align-items-start"
+            header="Choose :)" [style]="{'background-color': 'rgba(255, 255, 255, 0.5)'}">
       <form (ngSubmit)="submitMainForm()">
-        <h2>Choose :)</h2>
+        <!-- Поле X -->
+        <div class="field p-md:col-6 p-mb-3">
+          <label for="xLabel">X: </label>
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="xValue"
+            name="x"
+            id="xLabel"
+            class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid p-filled"
+          />
+          <p-knob
+            [(ngModel)]="xValue"
+            name="xKnob"
+            valueTemplate="{value}"
+            [min]="-3"
+            [max]="5"
+          ></p-knob>
+        </div>
 
         <!-- Поле Y -->
         <div class="field p-md:col-6 p-mb-3">
@@ -26,35 +45,36 @@
           />
         </div>
 
-        <!-- Поле X -->
+        <!-- Поле R -->
         <div class="field p-md:col-6 p-mb-3">
-          <label for="xLabel">X: </label>
+          <label for="rLabel">R: </label>
           <input
             type="text"
             pInputText
-            [(ngModel)]="xValue"
-            name="x"
-            id="xLabel"
+            [(ngModel)]="rValue"
+            name="r"
+            id="rLabel"
             class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid p-filled"
           />
           <p-knob
-            [(ngModel)]="xValue"
-            name="xKnob"
+            [(ngModel)]="rValue"
+            name="rKnob"
             valueTemplate="{value}"
-            [min]="-3"
-            [max]="5"
+            [min]="-5"
+            [max]="3"
           ></p-knob>
         </div>
 
         <!-- Кнопка отправки -->
-        <button
+        <p-button
           pButton
           type="submit"
           label="Send"
           [disabled]="false"
-          class="p-button-outlined p-button-lg p-d-block"
-        ></button>
+          [loading]="loading"
+          class="p-button-lg p-d-block"
+        ></p-button>
       </form>
-    </div>
+    </p-card>
   </div>
 </div>
