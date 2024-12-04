@@ -1,1 +1,25 @@
-<p>history works!</p>
+<div class="p-grid">
+  <div class="col-6 p-mr-5 p-mt-5">
+    <p-card class="card p-fluid" pStyleClass="text-black p-justify-start p-align-items-start"
+            header="History" [style]="{'background-color': 'rgba(255, 255, 255, 0.5)'}">
+      <p-table [value]="points" responsiveLayout="scroll"  [tableStyle]="{ 'min-width': '20rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>?</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>R</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-point>
+          <tr>
+            <td>{{ point.x }}</td>
+            <td>{{ point.x }}</td>
+            <td>{{ point.y }}</td>
+            <td>{{ point.r }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>
