@@ -3,6 +3,7 @@ import {AreaComponent} from './area/area.component';
 import {FormComponent} from './form/form.component';
 import {HistoryComponent} from './history/history.component';
 
+
 @Component({
   selector: 'app-main',
   imports: [

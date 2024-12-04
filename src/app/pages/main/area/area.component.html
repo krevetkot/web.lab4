@@ -1,1 +1,17 @@
-<p>area works!</p>
+<div class="p-grid">
+  <div class="col-6 p-mr-5 p-mt-5">
+    <p-card class="card p-fluid" pStyleClass="text-black p-justify-start p-align-items-start"
+            [style]="{'background-color': 'rgba(255, 255, 255, 0.5)'}">
+      <div class="area-container">
+        <canvas
+
+          #canvas
+          id="area"
+          width="500"
+          height="500"
+          (click)="onClickFunction($event)"
+        ></canvas>
+      </div>
+    </p-card>
+  </div>
+</div>
