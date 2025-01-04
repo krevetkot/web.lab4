@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterOutlet} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,7 +9,7 @@ import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterOutlet,
+  imports: [RouterLink,
     CommonModule,
     ReactiveFormsModule,
     InputTextModule,

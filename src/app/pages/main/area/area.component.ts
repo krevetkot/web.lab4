@@ -34,23 +34,23 @@ export class AreaComponent implements AfterViewInit{
   }
 
   onClickFunction(event: MouseEvent): void {
-    const canvas = this.canvasRef.nativeElement;
-    const rect = canvas.getBoundingClientRect();
-    const koef = this.canvasService.koef;
-
-    const clickX = event.clientX - rect.left;
-    const clickY = event.clientY - rect.top;
-
-    const canvasCenterX = canvas.width / 2;
-    const canvasCenterY = canvas.height / 2;
-
-    const relativeX = clickX - canvasCenterX;
-    const relativeY = canvasCenterY - clickY;
-
-    const graphX = +(relativeX * this.rValue / koef).toFixed(4);
-    const graphY = +(relativeY * this.rValue / koef).toFixed(4);
-
-    this.sendPoint(graphX, graphY, this.rValue);
+    // const canvas = this.canvasRef.nativeElement;
+    // const rect = canvas.getBoundingClientRect();
+    // const koef = this.canvasService.koef;
+    //
+    // const clickX = event.clientX - rect.left;
+    // const clickY = event.clientY - rect.top;
+    //
+    // const canvasCenterX = canvas.width / 2;
+    // const canvasCenterY = canvas.height / 2;
+    //
+    // const relativeX = clickX - canvasCenterX;
+    // const relativeY = canvasCenterY - clickY;
+    //
+    // const graphX = +(relativeX * this.rValue / koef).toFixed(4);
+    // const graphY = +(relativeY * this.rValue / koef).toFixed(4);
+    //
+    // this.sendPoint(graphX, graphY, this.rValue);
   }
 
   sendPoint(x: number, y: number, r: number): void {

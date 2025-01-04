@@ -2,6 +2,7 @@
 
 /* Importing primeng CSS file. */
 @import "primeng/resources/themes/bootstrap4-light-purple/theme.css";
+@import "primeicons/primeicons.css";
 //@import "primeng/resources/themes/bootstrap4-dark-blue/theme.css";
 
 .text-info:hover {
@@ -94,6 +95,7 @@ section.vh-100 {
   justify-content: center;
   align-items: start;
   height: 100%;
+  width: auto;
 }
 
 /* Изменение цвета текущего значения (положения индикатора) */
@@ -113,5 +115,9 @@ section.vh-100 {
   color: black;
 }
 .text-white {
+  color: white;
+}
+
+.a-sing-up{
   color: white;
 }

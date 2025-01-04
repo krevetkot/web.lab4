@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AreaComponent} from './area/area.component';
 import {FormComponent} from './form/form.component';
 import {HistoryComponent} from './history/history.component';
+import {MenuComponent} from './menu/menu.component';
 
 
 @Component({
@@ -9,7 +10,8 @@ import {HistoryComponent} from './history/history.component';
   imports: [
     AreaComponent,
     FormComponent,
-    HistoryComponent
+    HistoryComponent,
+    MenuComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
