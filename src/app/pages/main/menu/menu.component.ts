@@ -5,6 +5,7 @@ import {ScrollerModule} from 'primeng/scroller';
 import {CardModule} from 'primeng/card';
 import {CommonModule} from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
+import {Router} from '@angular/router';
 // import {MenuItemCommandEvent} from 'primeng/api/menuitem';
 
 @Component({
@@ -27,13 +28,16 @@ export class MenuComponent {
     {
       label: 'Logout',
       icon: PrimeIcons.SIGN_OUT,
-      route: '/login'
+      command: () => this.router.navigate(['/login'])
     },
   ];
 
   clean() {
     console.log('Cleaning history...');
     // потом все сделаю
+  }
+
+  constructor(private router: Router) {
   }
 
 }

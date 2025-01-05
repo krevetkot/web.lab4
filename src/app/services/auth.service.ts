@@ -8,8 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  http = inject(HttpClient);
   authApiUrl = environment.authApiUrl;
+  http = inject(HttpClient)
 
   constructor(private route: Router) { }
 
@@ -26,7 +26,7 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  login(userInfo: {login: string, password: string}): Observable<ArrayBuffer>{
+  login(userInfo: {login: string, password: string}){
     return this.http.post(this.authApiUrl, userInfo);
 
 

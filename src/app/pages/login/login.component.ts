@@ -6,6 +6,7 @@ import {AuthService} from '../../services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,15 @@ import { CardModule } from 'primeng/card';
     ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
-    CardModule
+    CardModule,
+    HttpClientModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
+  isRegister = false;
 
   constructor(private router: Router,
     private authService: AuthService) {}
@@ -40,5 +43,9 @@ export class LoginComponent implements OnInit{
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
       ])
     })
+  }
+
+  toggleForm() {
+    this.isRegister = !this.isRegister;
   }
 }
