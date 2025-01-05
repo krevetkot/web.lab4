@@ -52,11 +52,6 @@ section.vh-100 {
   justify-content: center; /* Центрирование по горизонтали */
 }
 
-//small {
-//  word-wrap: break-word; /* Переносит слово на новую строку, если оно слишком длинное */
-//  white-space: normal;   /* Стандартное поведение для переноса текста */
-//}
-
 
 .p-button.p-button-outlined:not(:disabled):hover {
   background: rgba(194, 152, 216, 0.04);
@@ -65,30 +60,30 @@ section.vh-100 {
 }
 
 
-  .p-button:not(:disabled):hover {
-    background: rgba(128, 0, 0);
-    color: #ffffff;
-    border-color: rgba(128, 0, 0);
-  }
+.p-button:not(:disabled):hover {
+  background: rgba(128, 0, 0);
+  color: #ffffff;
+  border-color: rgba(128, 0, 0);
+}
 
 
 .p-button{
   color: #ffffff !important;
 }
 
-@layer primeng {
-  .p-slider .p-slider-handle {
-    background: maroon !important;
-    border: 2px solid maroon !important;
-  }
-  .p-slider .p-slider-range {
-    background: maroon !important;
-  }
-  .p-slider:not(.p-disabled) .p-slider-handle:hover {
-    background: #3d1101 !important;
-    border-color: #3d1101 !important;
-  }
-}
+//@layer primeng {
+//  .p-slider .p-slider-handle {
+//    background: maroon !important;
+//    border: 2px solid maroon !important;
+//  }
+//  .p-slider .p-slider-range {
+//    background: maroon !important;
+//  }
+//  .p-slider:not(.p-disabled) .p-slider-handle:hover {
+//    background: #3d1101 !important;
+//    border-color: #3d1101 !important;
+//  }
+//}
 
 .centered-content {
   display: flex;
@@ -98,14 +93,14 @@ section.vh-100 {
   width: auto;
 }
 
-/* Изменение цвета текущего значения (положения индикатора) */
-::ng-deep .p-knob-value {
-  color: maroon !important; /* Здесь можно указать нужный цвет, например, LimeGreen */
-}
-
-::ng-deep .p-knob-range {
-  color: maroon !important; /* Здесь можно указать нужный цвет, например, Tomato */
-}
+///* Изменение цвета текущего значения (положения индикатора) */
+//::ng-deep .p-knob-value {
+//  color: maroon !important; /* Здесь можно указать нужный цвет, например, LimeGreen */
+//}
+//
+//::ng-deep .p-knob-range {
+//  color: maroon !important; /* Здесь можно указать нужный цвет, например, Tomato */
+//}
 
 .form-card{
   background-color: rgba(128, 0, 0, 0.5);

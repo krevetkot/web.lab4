@@ -5,7 +5,6 @@ import {ScrollerModule} from 'primeng/scroller';
 import {CardModule} from 'primeng/card';
 import {CommonModule} from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
-import {routes} from '../../../app.routes';
 // import {MenuItemCommandEvent} from 'primeng/api/menuitem';
 
 @Component({
@@ -23,7 +22,7 @@ export class MenuComponent {
     {
       label: 'Delete history',
       icon: PrimeIcons.TRASH,
-      // command(event: MenuItemCommandEvent): void
+      command: () => this.clean()
     },
     {
       label: 'Logout',
@@ -31,5 +30,10 @@ export class MenuComponent {
       route: '/login'
     },
   ];
+
+  clean() {
+    console.log('Cleaning history...');
+    // потом все сделаю
+  }
 
 }
