@@ -10,7 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink,
+  imports: [
     CommonModule,
     ReactiveFormsModule,
     InputTextModule,

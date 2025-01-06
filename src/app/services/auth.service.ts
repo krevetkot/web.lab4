@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Observable, of, throwError} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
+import {Response} from '../Interfaces/loginResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +27,11 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  login(userInfo: {login: string, password: string}, isRegister: boolean){
+  login(userInfo: {login: string, password: string}, isRegister: boolean): Observable<Response>{
     if (isRegister){
-      return this.http.post<LoginResponse>(this.authApiUrl+'/register', userInfo);
+      return this.http.post<Response>(this.authApiUrl+'/register', userInfo);
     }
-    return this.http.post<LoginResponse>(this.authApiUrl+'/login', userInfo);
+    return this.http.post<Response>(this.authApiUrl+'/login', userInfo);
   }
 
-}
-
-export interface LoginResponse {
-  status: number;
-  token?: string;
-  message?: string;
 }
