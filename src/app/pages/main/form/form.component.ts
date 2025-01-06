@@ -1,4 +1,4 @@
-import {Component, importProvidersFrom, OnInit} from '@angular/core';
+import {Component, importProvidersFrom, OnInit, Output} from '@angular/core';
 import { SliderModule } from 'primeng/slider';
 import { KnobModule} from 'primeng/knob';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, NgModel, FormsModule} from '@angular/forms';
@@ -6,6 +6,9 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
+import {PointService} from '../../../services/point.service';
+import {Point} from '../../../Interfaces/point.interface';
+import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -21,17 +24,30 @@ import {ButtonModule} from 'primeng/button';
   styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnInit{
+  @Output() pointAdded: EventEmitter<any> = new EventEmitter();
   mainForm!: FormGroup;
   yValue: number = 0;
   xValue: number = 0;
   rValue: number = 1;
   loading: boolean = false;
   constructor(private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private pointService: PointService) {}
 
   submitMainForm(){
     this.loading = true;
-    console.log(this.mainForm.value);
+    const newPoint: Point = {
+      x: this.xValue,
+      y: this.yValue,
+      r: this.rValue,
+      isHit: false // по умолчанию. на сервере пересчитаем
+    };
+    this.pointService.insertPoint(newPoint).subscribe({
+      error: (err) => {
+        alert('Ошибка сервера: ' + err.message);
+      }
+    })
+    this.pointAdded.emit(newPoint);
     this.loading = false;
   }
 
