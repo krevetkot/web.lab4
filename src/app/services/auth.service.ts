@@ -27,14 +27,12 @@ export class AuthService {
   }
 
   login(userInfo: {login: string, password: string}){
-    return this.http.post(this.authApiUrl, userInfo);
-
-
-
-    // if (userInfo.login === 'admin' && userInfo.password === 'admin123'){
-    //   this.setToken('sdsdadsvaavd452325t4fwec');
-    //   return of(true);
-    // }
-    // return throwError(()=> new Error('Failed login'));
+    return this.http.post<LoginResponse>(this.authApiUrl+'/login', userInfo);
   }
+}
+
+export interface LoginResponse {
+  status: number;
+  token?: string;
+  message?: string;
 }

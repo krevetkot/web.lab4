@@ -30,8 +30,23 @@ export class LoginComponent implements OnInit{
 
   submitLogin(){
     this.authService.login(this.loginForm.value).subscribe({
-      complete: () => this.router.navigate(['main']),
-      error: (err) => alert(err.message)
+      next: (response) => {
+        if (response.status === 200) {
+          // console.log('Login successful:', response.token);
+          // localStorage.setItem('token', <string>response.token);
+          this.router.navigate(['main']); // Перенаправление на главную страницу
+        }
+      },
+      error: (err) => {
+        //добавить сюда разделение на ошибки:
+        //пользователь с таким логином не существует
+        //пароль введен неверно
+        if (err.status === 401) {
+          alert('Неверный логин или пароль');
+        } else {
+          alert('Ошибка сервера: ' + err.message);
+        }
+      }
     })
   }
 
@@ -49,3 +64,4 @@ export class LoginComponent implements OnInit{
     this.isRegister = !this.isRegister;
   }
 }
+
