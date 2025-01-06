@@ -44,4 +44,9 @@ export class MainComponent implements OnInit{
     this.points.push(point);
     this.pointService.updatePoints(this.points);
   }
+
+  clearAll(){
+    this.points = [];
+    this.pointService.updatePoints([]);
+  }
 }

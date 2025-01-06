@@ -20,19 +20,6 @@ export class HistoryComponent implements OnInit{
 
   constructor(private pointService: PointService) {}
 
-  getAllPoints() {
-    this.pointService.getPoints().subscribe({
-      next: (result) => {
-        if (result.data) {
-          this.points = result.data;
-        }
-      },
-      error: (err) => {
-        alert('Ошибка сервера: ' + err.message);
-      }
-    })
-  }
-
   ngOnInit(): void {
     // this.getAllPoints();
     this.pointService.points$.subscribe((updatedPoints) => {

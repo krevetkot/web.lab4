@@ -13,18 +13,15 @@ export class PointService {
   http = inject(HttpClient)
 
   private pointsSubject = new BehaviorSubject<Point[]>([]);
-
-  constructor() { }
-
   // Observable, к которому можно подписаться в компонентах
   points$ = this.pointsSubject.asObservable();
+
+  constructor() { }
 
   // Метод для обновления массива точек
   updatePoints(points: Point[]) {
     this.pointsSubject.next(points);
   }
-
-
 
   getPoints():Observable<Response>{
     return this.http.get<Response>(this.pointsApiUrl);
@@ -32,6 +29,10 @@ export class PointService {
 
   insertPoint(point: Point){
     return this.http.post(this.pointsApiUrl, point);
+  }
+
+  deletePoints(){
+    return this.http.delete(this.pointsApiUrl);
   }
 
 }
