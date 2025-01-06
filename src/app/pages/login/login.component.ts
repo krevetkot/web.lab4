@@ -29,23 +29,19 @@ export class LoginComponent implements OnInit{
     private authService: AuthService) {}
 
   submitLogin(){
-    this.authService.login(this.loginForm.value).subscribe({
+    this.authService.login(this.loginForm.value, this.isRegister).subscribe({
       next: (response) => {
         if (response.status === 200) {
           // console.log('Login successful:', response.token);
           // localStorage.setItem('token', <string>response.token);
           this.router.navigate(['main']); // Перенаправление на главную страницу
         }
+        else {
+          alert(response.message);
+        }
       },
       error: (err) => {
-        //добавить сюда разделение на ошибки:
-        //пользователь с таким логином не существует
-        //пароль введен неверно
-        if (err.status === 401) {
-          alert('Неверный логин или пароль');
-        } else {
-          alert('Ошибка сервера: ' + err.message);
-        }
+        alert('Ошибка сервера: ' + err.message);
       }
     })
   }

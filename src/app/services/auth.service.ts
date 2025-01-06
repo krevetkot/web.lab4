@@ -26,9 +26,13 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  login(userInfo: {login: string, password: string}){
+  login(userInfo: {login: string, password: string}, isRegister: boolean){
+    if (isRegister){
+      return this.http.post<LoginResponse>(this.authApiUrl+'/register', userInfo);
+    }
     return this.http.post<LoginResponse>(this.authApiUrl+'/login', userInfo);
   }
+
 }
 
 export interface LoginResponse {
