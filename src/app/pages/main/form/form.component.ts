@@ -9,6 +9,8 @@ import {ButtonModule} from 'primeng/button';
 import {PointService} from '../../../services/point.service';
 import {Point} from '../../../Interfaces/point.interface';
 import {EventEmitter} from '@angular/core';
+import {CanvasService} from '../../../services/canvas.service';
+import {RadiusService} from '../../../services/radius.service';
 
 @Component({
   selector: 'app-form',
@@ -32,9 +34,16 @@ export class FormComponent implements OnInit{
   loading: boolean = false;
   constructor(private router: Router,
               private authService: AuthService,
-              private pointService: PointService) {}
+              private pointService: PointService,
+              private radiusService: RadiusService) {}
 
   submitMainForm(){
+
+    if (this.xValue < -4 || this.xValue > 4 || this.yValue < -3 || this.yValue > 5 || this.rValue <= 0) {
+      alert('Введены некорректные значения');
+      return;
+    }
+
     this.loading = true;
     const newPoint: Point = {
       x: this.xValue,
@@ -61,10 +70,18 @@ export class FormComponent implements OnInit{
 
   ngOnInit(): void {
     this.mainForm = new FormGroup({
-      'xValue': new FormControl('', [
-        Validators.min(-3), Validators.max(5)]),
-      'yValue': new FormControl('', [
-        Validators.min(-10), Validators.max(10)])
+      // 'xValue': new FormControl('', [
+      //   Validators.min(-3), Validators.max(5)]),
+      // 'yValue': new FormControl('', [
+      //   Validators.min(-10), Validators.max(10)])
     })
   }
+
+  onRChange(newRValue: number): void {
+    // this.rValue = newRValue; // Обновляем значение r
+    this.rValue = +newRValue.toFixed(1);
+    this.radiusService.setRadius(this.rValue);         // Вызываем функцию рисования
+  }
+
+
 }

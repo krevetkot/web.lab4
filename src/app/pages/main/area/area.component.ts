@@ -3,7 +3,7 @@ import {
   Component,
   ElementRef, EventEmitter,
   Inject,
-  Input,
+  Input, OnDestroy,
   OnInit, Output,
   PLATFORM_ID,
   Renderer2,
@@ -14,6 +14,8 @@ import {CardModule} from 'primeng/card';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {Point} from '../../../Interfaces/point.interface';
 import {PointService} from '../../../services/point.service';
+import {Subscription} from 'rxjs';
+import {RadiusService} from '../../../services/radius.service';
 
 
 @Component({
@@ -22,8 +24,8 @@ import {PointService} from '../../../services/point.service';
   templateUrl: './area.component.html',
   styleUrl: './area.component.scss'
 })
-export class AreaComponent implements AfterViewInit{
-
+export class AreaComponent implements AfterViewInit, OnDestroy{
+  private subscription!: Subscription;
   @ViewChild('canvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   @Output() pointAdded: EventEmitter<any> = new EventEmitter();
   @Input() points: Point[] = [];
@@ -33,7 +35,8 @@ export class AreaComponent implements AfterViewInit{
 
   constructor(@Inject(PLATFORM_ID) platformId: Object,
               private canvasService: CanvasService,
-              private pointService: PointService) {
+              private pointService: PointService,
+              private radiusService: RadiusService) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -43,6 +46,15 @@ export class AreaComponent implements AfterViewInit{
     }
     this.pointService.points$.subscribe((updatedPoints) => {
       this.points = updatedPoints; // Обновляем список точек
+      if (this.isBrowser && this.canvasRef?.nativeElement){
+        this.drawArea();
+      }
+    });
+    this.subscription = this.radiusService.radius$.subscribe((newRadius) => {
+      this.rValue = newRadius;
+      if (this.isBrowser && this.canvasRef?.nativeElement){
+        this.drawArea();
+      }
     });
   }
 
@@ -89,16 +101,18 @@ export class AreaComponent implements AfterViewInit{
         }
         this.pointAdded.emit(newPoint);
         console.log(newPoint);
+        if (this.isBrowser) {
+          this.drawArea();
+        }
       },
       error: (err) => {
         alert('Ошибка сервера: ' + err.message);
       }
     })
-    // this.pointAdded.emit(newPoint);
-    if (this.isBrowser) {
-      this.drawArea();
-    }
   }
 
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); // Освобождаем ресурсы
+  }
 }

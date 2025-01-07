@@ -30,7 +30,11 @@ export class MainComponent implements OnInit{
         }
       },
       error: (err) => {
-        alert('Ошибка сервера: ' + err.message);
+        if (err.status == 0){
+          window.alert('Сервер не отвечает');
+        } else {
+          window.alert('Ошибка сервера: ' + err.message);
+        }
       }
     })
   }

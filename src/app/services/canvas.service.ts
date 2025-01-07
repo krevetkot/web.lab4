@@ -47,19 +47,20 @@ export class CanvasService {
     ctx.stroke();
 
     // Draw points
-    // points.forEach((point) => {
-    //   this.drawPoint(
-    //     this.isItHit(point.x, point.y, R),
-    //     point.x,
-    //     point.y,
-    //     R,
-    //     ctx
-    //   );
-    // });
+    points.forEach((point) => {
+      this.drawPoint(
+        this.isItHit(point.x, point.y, R),
+        point.x,
+        point.y,
+        R,
+        ctx
+      );
+    });
 
     ctx.scale(1, -1);
     ctx.fillStyle = "black";
     ctx.font = "12px monospace";
+
     if (R===0){
       ctx.fillText("R", this.koef, -6);
       ctx.fillText("R/2", this.koef / 2, -6);
