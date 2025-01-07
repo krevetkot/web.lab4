@@ -18,7 +18,7 @@ import {PointService} from '../../../services/point.service';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
-export class MenuComponent {
+export class MenuComponent{
   @Output() pointAdded: EventEmitter<any> = new EventEmitter();
   items: MenuItem[] = [
     {

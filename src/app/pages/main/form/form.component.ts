@@ -11,6 +11,7 @@ import {Point} from '../../../Interfaces/point.interface';
 import {EventEmitter} from '@angular/core';
 import {CanvasService} from '../../../services/canvas.service';
 import {RadiusService} from '../../../services/radius.service';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -20,7 +21,8 @@ import {RadiusService} from '../../../services/radius.service';
     ReactiveFormsModule,
     FormsModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    CommonModule
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
@@ -39,8 +41,16 @@ export class FormComponent implements OnInit{
 
   submitMainForm(){
 
-    if (this.xValue < -4 || this.xValue > 4 || this.yValue < -3 || this.yValue > 5 || this.rValue <= 0) {
-      alert('Введены некорректные значения');
+    if (this.xValue < -4 || this.xValue > 4) {
+      alert('Х должен быть от -4 до 4.');
+      return;
+    }
+    if (this.yValue < -3 || this.yValue > 5) {
+      alert('Y должен быть от -3 до 5.');
+      return;
+    }
+    if (this.rValue <= 0) {
+      alert('Радиус должен быть строго больше 0.');
       return;
     }
 
