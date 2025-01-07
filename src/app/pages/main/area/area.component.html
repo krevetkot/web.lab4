@@ -2,7 +2,7 @@
   <div class="col-6 p-m-5">
     <p-card class="card p-fluid" pStyleClass="text-black p-justify-start p-align-items-start"
             [style]="{'background-color': 'rgba(255, 255, 255, 0.5)'}">
-      <div class="area-container">
+      <div class="area-container" *ngIf="isBrowser">
         <canvas
           #canvas
           id="area"

@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import {Point} from '../Interfaces/point.interface';
-import {Response} from '../Interfaces/loginResponse.interface';
+import {Response} from '../Interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class PointService {
   }
 
   insertPoint(point: Point){
-    return this.http.post(this.pointsApiUrl, point);
+    return this.http.post<Response>(this.pointsApiUrl, point);
   }
 
   deletePoints(){

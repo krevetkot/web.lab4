@@ -5,4 +5,5 @@ export interface Response {
   token?: string;
   message?: string;
   data?: Point[];
+  isHit?: boolean;
 }

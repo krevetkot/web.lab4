@@ -6,7 +6,7 @@
     <app-form (pointAdded)="addPoint($event)"></app-form>
   </div>
   <div class="p-col-12 p-xl-4 p-lg-2 p-md-2 p-s-1 centered-content">
-    <app-area></app-area>
+    <app-area (pointAdded)="addPoint($event)"></app-area>
   </div>
   <div class="p-col-12 p-xl-4 p-lg-2 p-md-2 p-s-1 centered-content">
     <app-history [points]="points"></app-history>

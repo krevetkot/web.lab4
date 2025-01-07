@@ -24,7 +24,7 @@ import {EventEmitter} from '@angular/core';
   styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnInit{
-  @Output() pointAdded: EventEmitter<any> = new EventEmitter();
+  @Output()  pointAdded: EventEmitter<any> = new EventEmitter();
   mainForm!: FormGroup;
   yValue: number = 0;
   xValue: number = 0;
@@ -43,11 +43,19 @@ export class FormComponent implements OnInit{
       isHit: false // по умолчанию. на сервере пересчитаем
     };
     this.pointService.insertPoint(newPoint).subscribe({
+      next: (result) => {
+        if (result.isHit) {
+          newPoint.isHit = result.isHit;
+        } else {
+          newPoint.isHit = false;
+        }
+        this.pointAdded.emit(newPoint);
+        console.log(newPoint);
+      },
       error: (err) => {
         alert('Ошибка сервера: ' + err.message);
       }
     })
-    this.pointAdded.emit(newPoint);
     this.loading = false;
   }
 
