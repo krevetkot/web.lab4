@@ -31,17 +31,13 @@ export class LoginComponent implements OnInit{
   submitLogin(){
     this.authService.login(this.loginForm.value, this.isRegister).subscribe({
       next: (response) => {
-        if (response.status === 200) {
-          // console.log('Login successful:', response.token);
-          // localStorage.setItem('token', <string>response.token);
+        if (response.token){
+          this.authService.setAccessToken(response.token);
           this.router.navigate(['main']); // Перенаправление на главную страницу
-        }
-        else {
-          alert(response.message);
         }
       },
       error: (err) => {
-        alert('Ошибка сервера: ' + err.message);
+        alert(err.message);
       }
     })
   }

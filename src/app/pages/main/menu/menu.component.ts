@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import {Router} from '@angular/router';
 import {PointService} from '../../../services/point.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -29,11 +30,12 @@ export class MenuComponent{
     {
       label: 'Logout',
       icon: PrimeIcons.SIGN_OUT,
-      command: () => this.router.navigate(['/login'])
+      command: () => this.logout()
     },
   ];
 
-  constructor(private router: Router, private pointService: PointService) {
+  constructor(private router: Router, private pointService: PointService,
+              private authService: AuthService) {
   }
 
   clean() {
@@ -43,6 +45,11 @@ export class MenuComponent{
       }
     })
     this.pointAdded.emit(); //в main должен вызваться clearAll
+  }
+
+  logout(){
+    this.authService.deleteAccessToken();
+    this.router.navigate(['/login']);
   }
 
 }
