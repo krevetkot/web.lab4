@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import {HttpClientModule} from "@angular/common/http";
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ import {HttpClientModule} from "@angular/common/http";
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   isRegister = false;
+  cookieService = inject(CookieService)
 
   constructor(private router: Router,
     private authService: AuthService) {}
@@ -31,14 +33,17 @@ export class LoginComponent implements OnInit{
   submitLogin(){
     this.authService.login(this.loginForm.value, this.isRegister).subscribe({
       next: (response) => {
-        if (response.token){
-          this.authService.setAccessToken(response.token);
+        if (response.accessToken && response.refreshToken){
+          this.authService.setAccessToken(response.accessToken);
+          this.cookieService.set('refreshToken', response.refreshToken);
           this.router.navigate(['main']); // Перенаправление на главную страницу
         }
       },
       error: (err) => {
         if (err.status==401){
-          alert("Проблемы с токеном.")
+          alert("Нет пользователя с таким логином. Пожалуйста, зарегистрируйтесь.")
+        } else if (err.status == 403){
+          alert("Неверный пароль.")
         }
         else {
           alert(err.message)

@@ -4,7 +4,7 @@ export const environment = {
   pointsApiUrl: 'http://localhost:8012/web4/api/points',
   authApiUrl: 'http://localhost:8012/web4/api/auth',
   tablePageSize: 10,
-  canvasScale: 75,
+  canvasKoef: 75,
   defaultX: 0,
   defaultY: 0,
   defaultR: 1,

@@ -5,6 +5,7 @@ import {HistoryComponent} from './history/history.component';
 import {MenuComponent} from './menu/menu.component';
 import {Point} from '../../Interfaces/point.interface';
 import {PointService} from '../../services/point.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ import {PointService} from '../../services/point.service';
 })
 export class MainComponent implements OnInit{
   points: Point[] = [];
-  constructor(private pointService: PointService) {}
+  constructor(private pointService: PointService, private router: Router) {}
 
   getAllPoints() {
     this.pointService.getPoints().subscribe({
@@ -33,7 +34,11 @@ export class MainComponent implements OnInit{
       error: (err) => {
         if (err.status == 0){
           window.alert('Сервер не отвечает');
-        } else {
+        } else if (err.status == 403){
+          window.alert("Пожалуйста, авторизуйтесь.");
+          this.router.navigate(['login']);
+        }
+        else {
           window.alert('Ошибка сервера: ' + err.message);
         }
       }

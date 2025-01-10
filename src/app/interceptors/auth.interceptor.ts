@@ -19,10 +19,10 @@ export class AuthInterceptor implements HttpInterceptor {
     if (req.url.includes(refreshTokenUrl)) {
       const cloned = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
+        withCredentials: true
       });
-      return next.handle(cloned); // Отправляем запрос с новым токеном
+      return next.handle(cloned);
     }
-
 
     console.log(token);
 
@@ -32,6 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
           const newToken = this.auth.getAccessToken(); // Берём новый токен
           const cloned = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${newToken}`),
+            withCredentials: true
           });
           return next.handle(cloned); // Отправляем запрос с новым токеном
         })

@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import {Response} from '../Interfaces/response.interface';
 import {jwtDecode} from 'jwt-decode';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -13,9 +14,10 @@ import {jwtDecode} from 'jwt-decode';
 export class AuthService {
   authApiUrl = environment.authApiUrl;
   http = inject(HttpClient)
+  cookieService = inject(CookieService)
   tokenName = 'accessToken';
 
-  constructor(private route: Router) { }
+  constructor(private router: Router) { }
 
   setAccessToken(token: string){
     this.setLocalStorageItem(this.tokenName, token);
@@ -42,7 +44,6 @@ export class AuthService {
 
   isLoggedIn(): boolean{
     return this.getAccessToken() !== null;
-    // Можно добавить проверку срока действия токена
   }
 
   login(userInfo: {login: string, password: string}, isRegister: boolean): Observable<Response>{
@@ -52,27 +53,38 @@ export class AuthService {
     return this.http.post<Response>(this.authApiUrl+'/login', userInfo);
   }
 
-  // Проверка, истёк ли токен
+  logout(){
+    this.deleteAccessToken();
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']);
+  }
+
+
   isTokenExpired(token: string): boolean {
     try {
-      const { exp } = jwtDecode<{ exp: number }>(token); // Декодируем JWT, узнаем время окончания токена
-      const now = Math.floor(Date.now() / 1000); // Текущее время в секундах
+      const { exp } = jwtDecode<{ exp: number }>(token);
+      const now = Math.floor(Date.now() / 1000);
       return exp < now; // Возвращает true, если токен истёк
     } catch (e) {
-      console.error('Invalid token:', e);
-      return true; // Если токен некорректен, считаем его истёкшим
+      alert('Invalid token:' + e);
+      this.logout();
+      return false;
     }
   }
 
-  // Обновление токена
   refreshToken(): Observable<void> {
-    return this.http.post<any>(`${this.authApiUrl}/refresh`, {}).pipe(
+    return this.http.post<any>(`${this.authApiUrl}/refresh`, {}, { withCredentials: true }).pipe(
       tap((response) => {
-        this.setLocalStorageItem('accessToken', response.accessToken); // Сохраняем новый токен
+        this.setLocalStorageItem('accessToken', response.accessToken);
       }),
       catchError((error) => {
-        console.error('Refresh token error:', error);
-        return of(); // Можно вернуть пустое значение или обработать ошибку
+        if (error.status === 403){
+          alert("Срок вашей сессии истек. Пожалуйста, войдите в аккаунт заново.")
+          this.logout()
+          return of()
+        } else {
+          return throwError(() => error)
+        }
       })
     );
   }

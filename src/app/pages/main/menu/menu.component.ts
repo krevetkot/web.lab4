@@ -30,7 +30,7 @@ export class MenuComponent{
     {
       label: 'Logout',
       icon: PrimeIcons.SIGN_OUT,
-      command: () => this.logout()
+      command: () => this.authService.logout()
     },
   ];
 
@@ -47,9 +47,6 @@ export class MenuComponent{
     this.pointAdded.emit(); //в main должен вызваться clearAll
   }
 
-  logout(){
-    this.authService.deleteAccessToken();
-    this.router.navigate(['/login']);
-  }
+
 
 }
