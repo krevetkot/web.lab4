@@ -3,7 +3,6 @@
 /* Importing primeng CSS file. */
 @import "primeng/resources/themes/bootstrap4-light-purple/theme.css";
 @import "primeicons/primeicons.css";
-//@import "primeng/resources/themes/bootstrap4-dark-blue/theme.css";
 
 .text-info:hover {
   background: rgb(61, 17, 1);
@@ -91,6 +90,8 @@ section.vh-100 {
   align-items: start;
   height: 100%;
   width: auto;
+  min-width: 500px;
+  min-height: 300px;
 }
 
 ///* Изменение цвета текущего значения (положения индикатора) */

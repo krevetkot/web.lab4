@@ -37,7 +37,6 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(cloned); // Отправляем запрос с новым токеном
         }),
         catchError((error) => {
-          // Если возникла ошибка при обновлении токена, выбрасываем ошибку
           return of();
         })
       );
