@@ -16,6 +16,7 @@ import {Point} from '../../../Interfaces/point.interface';
 import {PointService} from '../../../services/point.service';
 import {Subscription} from 'rxjs';
 import {RadiusService} from '../../../services/radius.service';
+import {environment} from '../../../../environments/environment';
 
 
 @Component({
@@ -24,12 +25,12 @@ import {RadiusService} from '../../../services/radius.service';
   templateUrl: './area.component.html',
   styleUrl: './area.component.scss'
 })
-export class AreaComponent implements AfterViewInit, OnDestroy{
+export class AreaComponent implements OnInit, AfterViewInit, OnDestroy{
   private subscription!: Subscription;
   @ViewChild('canvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   @Output() pointAdded: EventEmitter<any> = new EventEmitter();
   @Input() points: Point[] = [];
-  rValue = 1;
+  rValue = environment.defaultR;
 
   public isBrowser: boolean;
 
@@ -40,10 +41,7 @@ export class AreaComponent implements AfterViewInit, OnDestroy{
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  ngAfterViewInit(): void {
-    if (this.isBrowser){
-      this.drawArea();
-    }
+  ngOnInit() {
     this.pointService.points$.subscribe((updatedPoints) => {
       this.points = updatedPoints; // Обновляем список точек
       if (this.isBrowser && this.canvasRef?.nativeElement){
@@ -56,6 +54,13 @@ export class AreaComponent implements AfterViewInit, OnDestroy{
         this.drawArea();
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.rValue = environment.defaultR;
+    if (this.isBrowser && this.canvasRef?.nativeElement){
+      this.drawArea();
+    }
   }
 
   drawArea(): void {

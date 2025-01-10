@@ -12,6 +12,7 @@ import {EventEmitter} from '@angular/core';
 import {CanvasService} from '../../../services/canvas.service';
 import {RadiusService} from '../../../services/radius.service';
 import {CommonModule} from '@angular/common';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-form',
@@ -32,7 +33,7 @@ export class FormComponent implements OnInit{
   mainForm!: FormGroup;
   yValue: number = 0;
   xValue: number = 0;
-  rValue: number = 1;
+  rValue: number = environment.defaultR;
   loading: boolean = false;
   constructor(private router: Router,
               private authService: AuthService,

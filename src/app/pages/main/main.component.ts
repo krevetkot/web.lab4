@@ -27,6 +27,7 @@ export class MainComponent implements OnInit{
       next: (result) => {
         if (result.data) {
           this.points = result.data;
+          this.pointService.updatePoints(this.points);
         }
       },
       error: (err) => {
@@ -41,7 +42,6 @@ export class MainComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllPoints();
-    this.pointService.updatePoints(this.points);
   }
 
   addPoint(point: Point): void {
