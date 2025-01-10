@@ -3,13 +3,28 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable, from } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { switchMap } from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  authApiUrl = environment.authApiUrl;
   constructor(private auth: AuthService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    // URL для обновления токена
+    const refreshTokenUrl = this.authApiUrl+'/refresh';
     const token = this.auth.getAccessToken();
+
+    // Если это запрос на обновление токена — пропускаем без обработки
+    if (req.url.includes(refreshTokenUrl)) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+      });
+      return next.handle(cloned); // Отправляем запрос с новым токеном
+    }
+
+
+    console.log(token);
 
     if (token && this.auth.isTokenExpired(token)) {
       return from(this.auth.refreshToken().toPromise()).pipe(

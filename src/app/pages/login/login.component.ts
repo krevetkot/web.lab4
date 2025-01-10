@@ -37,7 +37,12 @@ export class LoginComponent implements OnInit{
         }
       },
       error: (err) => {
-        alert(err.message);
+        if (err.status==401){
+          alert("Проблемы с токеном.")
+        }
+        else {
+          alert(err.message)
+        }
       }
     })
   }

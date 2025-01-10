@@ -18,16 +18,26 @@ export class AuthService {
   constructor(private route: Router) { }
 
   setAccessToken(token: string){
-    localStorage.setItem(this.tokenName, token);
+    this.setLocalStorageItem(this.tokenName, token);
     console.log(token)
   }
-
   getAccessToken(){
-    return localStorage.getItem(this.tokenName);
+    return this.getLocalStorageItem(this.tokenName);
   }
-
   deleteAccessToken(){
     localStorage.removeItem(this.tokenName);
+  }
+
+  setLocalStorageItem(key: string, value: string){
+    if (typeof window !== "undefined" && window.localStorage){
+      localStorage.setItem(key, value);
+    }
+  }
+  getLocalStorageItem(key: string): string | null{
+    if (typeof window !== "undefined" && window.localStorage){
+      return localStorage.getItem(key);
+    }
+    return null;
   }
 
   isLoggedIn(): boolean{
@@ -58,7 +68,7 @@ export class AuthService {
   refreshToken(): Observable<void> {
     return this.http.post<any>(`${this.authApiUrl}/refresh`, {}).pipe(
       tap((response) => {
-        localStorage.setItem('accessToken', response.accessToken); // Сохраняем новый токен
+        this.setLocalStorageItem('accessToken', response.accessToken); // Сохраняем новый токен
       }),
       catchError((error) => {
         console.error('Refresh token error:', error);
