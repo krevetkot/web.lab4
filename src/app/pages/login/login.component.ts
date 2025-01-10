@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
       },
       error: (err) => {
         if (err.status==401){
-          alert("Нет пользователя с таким логином. Пожалуйста, зарегистрируйтесь.")
+          alert("Неверный логин.")
         } else if (err.status == 403){
           alert("Неверный пароль.")
         }

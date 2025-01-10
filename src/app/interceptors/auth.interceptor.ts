@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
+import {Observable, from, catchError, of} from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
@@ -35,6 +35,10 @@ export class AuthInterceptor implements HttpInterceptor {
             withCredentials: true
           });
           return next.handle(cloned); // Отправляем запрос с новым токеном
+        }),
+        catchError((error) => {
+          // Если возникла ошибка при обновлении токена, выбрасываем ошибку
+          return of();
         })
       );
     }
