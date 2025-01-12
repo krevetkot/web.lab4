@@ -117,3 +117,31 @@ section.vh-100 {
 .a-sing-up{
   color: white;
 }
+
+
+///* Мобильный режим */
+@media (max-width: 668px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+///* Планшетный режим */
+//@media (min-width: 668px) and (max-width: 1076px) {
+//  .tablet-only {
+//    display: block;
+//  }
+//  .mobile-only, .desktop-only {
+//    display: none;
+//  }
+//}
+//
+///* Десктопный режим */
+//@media (min-width: 1077px) {
+//  .desktop-only {
+//    display: block;
+//  }
+//  .mobile-only, .tablet-only {
+//    display: none;
+//  }
+//}

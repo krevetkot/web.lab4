@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log(token);
 
     if (token && this.auth.isTokenExpired(token)) {
-      return from(this.auth.refreshToken().toPromise()).pipe(
+      return from(this.auth.refreshToken()).pipe(
         switchMap(() => {
           const newToken = this.auth.getAccessToken(); // Берём новый токен
           const cloned = req.clone({
@@ -37,7 +37,11 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(cloned); // Отправляем запрос с новым токеном
         }),
         catchError((error) => {
-          return of();
+          if (error.status == 503 || error.status == null){
+            alert("Сервер не отвечает.")
+            this.auth.logout()
+          }
+            return of();
         })
       );
     }

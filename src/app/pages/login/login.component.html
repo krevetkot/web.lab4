@@ -1,7 +1,8 @@
 <section class="vh-100 bg-login">
-  <div class="p-grid p-justify-start p-align-items-start p-col-8">
+  <div class="p-grid p-justify-start p-align-items-start login-card">
     <!-- Карточка PrimeNG -->
-    <p-card styleClass="bg-login-window text-white p-justify-start p-align-items-start" header="{{ isRegister ? 'Sign up' : 'Sign in' }}" [style]="{'border-radius': '1rem'}">
+    <p-card styleClass="bg-login-window text-white p-justify-start p-align-items-start"
+            header="{{ isRegister ? 'Sign up' : 'Sign in' }}" [style]="{'border-radius': '1rem'}">
       <form (ngSubmit)="submitLogin()" [formGroup]="loginForm">
         <!-- Поле ввода Login -->
         <div class="p-field p-mb-4">
