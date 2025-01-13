@@ -6,7 +6,6 @@ import {
   Input, OnDestroy,
   OnInit, Output,
   PLATFORM_ID,
-  Renderer2,
   ViewChild
 } from '@angular/core';
 import {CanvasService} from '../../../services/canvas.service';
@@ -95,7 +94,7 @@ export class AreaComponent implements OnInit, AfterViewInit, OnDestroy{
       x: x,
       y: y,
       r: r,
-      isHit: false // по умолчанию. на сервере пересчитаем
+      isHit: false // По умолчанию. На сервере пересчитаем
     };
     this.pointService.insertPoint(newPoint).subscribe({
       next: (result) => {

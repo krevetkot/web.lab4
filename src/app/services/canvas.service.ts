@@ -88,7 +88,7 @@ export class CanvasService {
   }
 
   drawPoint(isHit: boolean, x: number, y: number, r: number, ctx: CanvasRenderingContext2D): void {
-    if (r === 0 || x === undefined || x === null) return;
+    if (r === 0) return;
 
     const SCALE_FACTOR = this.koef / r;
     ctx.beginPath();

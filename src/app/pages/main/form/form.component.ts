@@ -1,15 +1,13 @@
-import {Component, importProvidersFrom, OnInit, Output} from '@angular/core';
-import { SliderModule } from 'primeng/slider';
-import { KnobModule} from 'primeng/knob';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators, NgModel, FormsModule} from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SliderModule} from 'primeng/slider';
+import {KnobModule} from 'primeng/knob';
+import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {PointService} from '../../../services/point.service';
 import {Point} from '../../../Interfaces/point.interface';
-import {EventEmitter} from '@angular/core';
-import {CanvasService} from '../../../services/canvas.service';
 import {RadiusService} from '../../../services/radius.service';
 import {CommonModule} from '@angular/common';
 import {environment} from '../../../../environments/environment';
@@ -28,19 +26,21 @@ import {environment} from '../../../../environments/environment';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class FormComponent implements OnInit{
-  @Output()  pointAdded: EventEmitter<any> = new EventEmitter();
+export class FormComponent implements OnInit {
+  @Output() pointAdded: EventEmitter<any> = new EventEmitter();
   mainForm!: FormGroup;
   yValue: number = 0;
   xValue: number = 0;
   rValue: number = environment.defaultR;
   loading: boolean = false;
+
   constructor(private router: Router,
               private authService: AuthService,
               private pointService: PointService,
-              private radiusService: RadiusService) {}
+              private radiusService: RadiusService) {
+  }
 
-  submitMainForm(){
+  submitMainForm() {
 
     if (this.xValue < -4 || this.xValue > 4) {
       alert('Х должен быть от -4 до 4.');
@@ -60,7 +60,7 @@ export class FormComponent implements OnInit{
       x: this.xValue,
       y: this.yValue,
       r: this.rValue,
-      isHit: false // по умолчанию. на сервере пересчитаем
+      isHit: false // По умолчанию. На сервере пересчитаем
     };
     this.pointService.insertPoint(newPoint).subscribe({
       next: (result) => {

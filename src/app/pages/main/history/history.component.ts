@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { TableModule } from 'primeng/table';
-import { ScrollerModule } from 'primeng/scroller';
+import {TableModule} from 'primeng/table';
+import {ScrollerModule} from 'primeng/scroller';
 import {CardModule} from 'primeng/card';
 import {PointService} from '../../../services/point.service';
 import {Point} from '../../../Interfaces/point.interface';
@@ -15,13 +15,13 @@ import {Point} from '../../../Interfaces/point.interface';
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
-export class HistoryComponent implements OnInit{
+export class HistoryComponent implements OnInit {
   @Input() points: Point[] = [];
 
-  constructor(private pointService: PointService) {}
+  constructor(private pointService: PointService) {
+  }
 
   ngOnInit(): void {
-    // this.getAllPoints();
     this.pointService.points$.subscribe((updatedPoints) => {
       this.points = updatedPoints; // Обновляем список точек
     });

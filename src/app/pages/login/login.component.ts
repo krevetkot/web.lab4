@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit{
         if (response.accessToken && response.refreshToken){
           this.authService.setAccessToken(response.accessToken);
           this.cookieService.set('refreshToken', response.refreshToken);
-          this.router.navigate(['main']); // Перенаправление на главную страницу
+          this.router.navigate(['main']).then(); // Перенаправление на главную страницу
         }
       },
       error: (err) => {

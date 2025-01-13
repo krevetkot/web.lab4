@@ -1,5 +1,5 @@
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
-import {Inject, Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {Injectable} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 
 @Injectable({
@@ -21,9 +21,8 @@ export class AuthGuard
       return true; // Пользователь авторизован, разрешаем доступ
     } else {
       // Переадресация на login
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-      //здесь можно не переадресовывать, а выводить сообщение а ля "вы не зареганы, доступ запрещен"
-      return false;
+      this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}}).then();
+       return false;
     }
   }
 }

@@ -7,7 +7,6 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withFetch,
-  withInterceptors,
   withInterceptorsFromDi
 } from '@angular/common/http';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
@@ -16,10 +15,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration(withEventReplay()),
-    // provideHttpClient(
-    //   withFetch(),
-    //   withInterceptors([AuthInterceptor])
-    // ),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     {
       provide:HTTP_INTERCEPTORS,

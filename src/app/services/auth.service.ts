@@ -56,7 +56,7 @@ export class AuthService {
   logout(){
     this.deleteAccessToken();
     this.cookieService.deleteAll();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then();
   }
 
 

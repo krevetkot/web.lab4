@@ -36,7 +36,7 @@ export class MainComponent implements OnInit{
           window.alert('Сервер не отвечает');
         } else if (err.status == 403){
           window.alert("Пожалуйста, авторизуйтесь.");
-          this.router.navigate(['login']);
+          this.router.navigate(['login']).then();
         }
         else {
           window.alert('Ошибка сервера: ' + err.message);

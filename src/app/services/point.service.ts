@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 import {Point} from '../Interfaces/point.interface';
 import {Response} from '../Interfaces/response.interface';
 
@@ -16,22 +16,23 @@ export class PointService {
   // Observable, к которому можно подписаться в компонентах
   points$ = this.pointsSubject.asObservable();
 
-  constructor() { }
+  constructor() {
+  }
 
   // Метод для обновления массива точек
   updatePoints(points: Point[]) {
     this.pointsSubject.next(points);
   }
 
-  getPoints():Observable<Response>{
+  getPoints(): Observable<Response> {
     return this.http.get<Response>(this.pointsApiUrl);
   }
 
-  insertPoint(point: Point){
+  insertPoint(point: Point) {
     return this.http.post<Response>(this.pointsApiUrl, point);
   }
 
-  deletePoints(){
+  deletePoints() {
     return this.http.delete(this.pointsApiUrl);
   }
 

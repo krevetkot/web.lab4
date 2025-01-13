@@ -49,6 +49,7 @@ section.vh-100 {
   display: flex;
   align-items: center; /* Центрирование по вертикали */
   justify-content: center; /* Центрирование по горизонтали */
+  flex-direction: column;
 }
 
 
@@ -119,29 +120,9 @@ section.vh-100 {
 }
 
 
-///* Мобильный режим */
+/* Мобильный режим */
 @media (max-width: 668px) {
   body {
     overflow-x: hidden;
   }
 }
-
-///* Планшетный режим */
-//@media (min-width: 668px) and (max-width: 1076px) {
-//  .tablet-only {
-//    display: block;
-//  }
-//  .mobile-only, .desktop-only {
-//    display: none;
-//  }
-//}
-//
-///* Десктопный режим */
-//@media (min-width: 1077px) {
-//  .desktop-only {
-//    display: block;
-//  }
-//  .mobile-only, .tablet-only {
-//    display: none;
-//  }
-//}
